@@ -1,0 +1,11 @@
+{
+  "name": "Bellar Presale",
+  "version": 2,
+  "buildCommand": "echo 'No build needed'",
+  "env": {
+    "STRIPE_PUBLISHABLE_KEY": {
+      "description": "Your Stripe publishable key for payments",
+      "placeholder": "pk_live_xxxxxxxxxxxxxxxx"
+    }
+  }
+}

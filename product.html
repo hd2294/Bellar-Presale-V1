@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bellar Hat - Select Your Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #2a2a2a;
+            background: #ffffff;
+        }
+        
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            cursor: pointer;
+        }
+        
+        .breadcrumb {
+            padding: 12px 0;
+            font-size: 13px;
+            color: #999;
+        }
+        
+        .breadcrumb a {
+            color: #1a1a1a;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .product-section {
+            padding: 60px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        
+        .product-gallery {
+            position: sticky;
+            top: 100px;
+        }
+        
+        .main-image {
+            aspect-ratio: 3/4;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        
+        .thumbnail {
+            aspect-ratio: 1;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .thumbnail:hover {
+            border-color: #1a1a1a;
+        }
+        
+        .thumbnail.active {
+            border-color: #1a1a1a;
+        }
+        
+        .product-details h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        
+        .product-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .product-savings {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .product-description {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        
+        .selector-group {
+            margin-bottom: 40px;
+        }
+        
+        .selector-label {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            display: block;
+        }
+        
+        .color-selector {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .color-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .color-swatch {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            border: 2px solid #e5e5e5;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .color-option input[type="radio"] {
+            display: none;
+        }
+        
+        .color-option input[type="radio"]:checked + .color-swatch {
+            border-color: #1a1a1a;
+            box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
+        }
+        
+        .color-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+        
+        .size-selector {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .size-option {
+            flex: 1;
+            position: relative;
+        }
+        
+        .size-option input[type="radio"] {
+            display: none;
+        }
+        
+        .size-option label {
+            display: block;
+            padding: 16px;
+            border: 2px solid #e5e5e5;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .size-option input[type="radio"]:checked + label {
+            border-color: #1a1a1a;
+            background: #f8f8f8;
+        }
+        
+        .size-description {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+        
+        .quantity-input {
+            display: flex;
+            align-items: center;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            overflow: hidden;
+            width: fit-content;
+        }
+        
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: white;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+        
+        .qty-btn:hover {
+            background: #f0f0f0;
+        }
+        
+        .qty-input {
+            width: 60px;
+            text-align: center;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .qty-input::-webkit-outer-spin-button,
+        .qty-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        .add-to-cart {
+            display: block;
+            width: 100%;
+            background: #1a1a1a;
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+        
+        .add-to-cart:hover {
+            background: #333;
+        }
+        
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            background: white;
+            color: #1a1a1a;
+            padding: 18px;
+            border: 2px solid #1a1a1a;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .checkout-btn:hover {
+            background: #f8f8f8;
+        }
+        
+        .product-info {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 40px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        
+        .product-info h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .product-info ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .product-info li {
+            margin-bottom: 8px;
+        }
+        
+        .product-info strong {
+            color: #1a1a1a;
+        }
+        
+        .size-info {
+            background: #f8f8f8;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .size-info strong {
+            color: #1a1a1a;
+        }
+        
+        .cart-summary {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .summary-total {
+            border-top: 1px solid #e5e5e5;
+            padding-top: 12px;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+        
+        .faq-section {
+            padding: 80px 0;
+            background: #fafafa;
+            margin-top: 80px;
+        }
+        
+        .faq-section .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 8px;
+            padding: 20px;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+        }
+        
+        .faq-question {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            padding: 0;
+        }
+        
+        .faq-question:hover {
+            color: #666;
+        }
+        
+        .faq-toggle {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+        
+        .faq-item.open .faq-toggle {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-top: 0;
+        }
+        
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            margin-top: 15px;
+        }
+        
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 13px;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        footer a:hover {
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 1024px) {
+            .product-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .product-gallery {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .product-details h1 {
+                font-size: 28px;
+            }
+            
+            .product-price {
+                font-size: 24px;
+            }
+            
+            .size-selector {
+                flex-direction: column;
+            }
+            
+            .thumbnail-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .faq-section .section-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo" onclick="window.location.href='/'">BELLAR</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a onclick="window.location.href='/'">← Back to Presale</a>
+        </div>
+    </div>
+
+    <section class="container">
+        <div class="product-section">
+            <div class="product-gallery">
+                <div class="main-image">
+                    <img id="mainImage" src="https://images.unsplash.com/photo-1611938214457-0eab55dd4d0b?w=600&h=800&fit=crop" alt="Bellar Hat">
+                </div>
+                <div class="thumbnail-grid">
+                    <div class="thumbnail active" onclick="changeImage('https://images.unsplash.com/photo-1611938214457-0eab55dd4d0b?w=200&h=200&fit=crop', this)">
+                        <img src="https://images.unsplash.com/photo-1611938214457-0eab55dd4d0b?w=200&h=200&fit=crop" alt="">
+                    </div>
+                    <div class="thumbnail" onclick="changeImage('https://images.unsplash.com/photo-1620844208156-04b79e3eadc4?w=200&h=200&fit=crop', this)">
+                        <img src="https://images.unsplash.com/photo-1620844208156-04b79e3eadc4?w=200&h=200&fit=crop" alt="">
+                    </div>
+                    <div class="thumbnail" onclick="changeImage('https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=200&h=200&fit=crop', this)">
+                        <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=200&h=200&fit=crop" alt="">
+                    </div>
+                    <div class="thumbnail" onclick="changeImage('https://images.unsplash.com/photo-1595777712802-d2fed6400e5a?w=200&h=200&fit=crop', this)">
+                        <img src="https://images.unsplash.com/photo-1595777712802-d2fed6400e5a?w=200&h=200&fit=crop" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-details">
+                <h1>The Bellar Hat</h1>
+                <div class="product-price">$135</div>
+                <div class="product-savings">Presale price • Save $35 off retail (July 15th)</div>
+
+                <p class="product-description">
+                    Engineered for the woman who refuses to compromise. Our patented collapsible mechanism transforms from a stunning full silhouette to pocket-sized elegance in seconds. Premium materials. Meticulous craftsmanship. Bold design. This is luxury that moves with you.
+                </p>
+
+                <form id="productForm">
+                    <div class="selector-group">
+                        <label class="selector-label">Choose Your Color</label>
+                        <div class="color-selector">
+                            <div class="color-option">
+                                <input type="radio" id="color-white" name="color" value="White" checked onchange="updateImage()">
+                                <label for="color-white" class="color-swatch" style="background: #FFFFFF; border: 2px solid #ddd;"></label>
+                                <span class="color-name">White</span>
+                            </div>
+                            <div class="color-option">
+                                <input type="radio" id="color-beige" name="color" value="Beige" onchange="updateImage()">
+                                <label for="color-beige" class="color-swatch" style="background: #D4A574;"></label>
+                                <span class="color-name">Beige</span>
+                            </div>
+                            <div class="color-option">
+                                <input type="radio" id="color-pink" name="color" value="Pink" onchange="updateImage()">
+                                <label for="color-pink" class="color-swatch" style="background: #E8B4C8;"></label>
+                                <span class="color-name">Pink</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="size-info">
+                        <strong>All hats include an adjustable band</strong> for a perfect, comfortable fit
+                    </div>
+
+                    <div class="selector-group">
+                        <label class="selector-label">Select Your Size</label>
+                        <div class="size-selector">
+                            <div class="size-option">
+                                <input type="radio" id="size-sm" name="size" value="S/M" checked>
+                                <label for="size-sm">
+                                    S/M
+                                    <div class="size-description">55-57 cm</div>
+                                </label>
+                            </div>
+                            <div class="size-option">
+                                <input type="radio" id="size-lxl" name="size" value="L/XL">
+                                <label for="size-lxl">
+                                    L/XL
+                                    <div class="size-description">58-61 cm</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="selector-group">
+                        <label class="selector-label">Quantity</label>
+                        <div class="quantity-input">
+                            <button type="button" class="qty-btn" onclick="decreaseQty()">−</button>
+                            <input type="number" id="quantity" class="qty-input" value="1" min="1" max="10">
+                            <button type="button" class="qty-btn" onclick="increaseQty()">+</button>
+                        </div>
+                    </div>
+
+                    <div class="cart-summary">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">$135.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span>Calculated at checkout</span>
+                        </div>
+                        <div class="summary-row summary-total">
+                            <span>Total (est.)</span>
+                            <span id="total">$135.00</span>
+                        </div>
+                    </div>
+
+                    <button type="button" class="add-to-cart" onclick="addToCart(event)">Add to Cart</button>
+                    <button type="button" class="checkout-btn" onclick="checkout(event)">Buy Now with Stripe</button>
+                </form>
+
+                <div class="product-info">
+                    <h3>Why Choose Bellar</h3>
+                    <ul>
+                        <li><strong>Patented Technology</strong> — Unique collapse mechanism engineered for effortless packing</li>
+                        <li><strong>Luxury Materials</strong> — Premium quality that lasts, built for the adventurous</li>
+                        <li><strong>Adjustable Fit</strong> — Internal adjustable band fits most comfortably across both sizes</li>
+                        <li><strong>Bold Design</strong> — Fashion-forward styles that turn heads, adventure-ready</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How does the presale work?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Order your Bellar hat now at the special presale price of $135. Your hat will be crafted and shipped when the product officially launches on July 15th, 2026. By preordering, you secure the luxury collapsible hat at a $35 discount off the retail price of $170.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>When will I receive my hat?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>All presale orders will ship starting July 15th, 2026. Shipping times depend on your location. Domestic orders typically arrive within 5-7 business days. International orders may take 10-14 business days. You'll receive a tracking number via email as soon as your order ships.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What are the available sizes?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The Bellar hat comes in two sizes: S/M (55-57 cm) and L/XL (58-61 cm). Both sizes feature an adjustable internal band to ensure a perfect, comfortable fit for most head sizes. This adjustable design means you'll always have the ideal fit regardless of your exact head measurement within the size range.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What's your return and exchange policy?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We offer a 30-day return guarantee from the date you receive your hat. If you're not absolutely in love with your Bellar, you can return it in original condition for a full refund or exchange. We cover return shipping for defective items. No questions asked.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do refunds work?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Refunds are processed within 5-7 business days of receiving your return. The refund amount reflects your original purchase price. Return shipping is free for defective items; if you're returning for other reasons, you can use any shipping method. Once we receive and inspect your hat, your refund will be automatically credited to your original payment method.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Is the hat machine washable?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We recommend hand washing your Bellar hat with cool water and mild soap. Gently reshape while damp and lay flat to dry. Machine washing is not recommended as it may damage the premium materials and the patented collapse mechanism. This care extends the life of your investment piece.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Do you ship internationally?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we ship to most countries worldwide. International shipping costs vary based on location and will be calculated at checkout. Delivery times are typically 10-14 business days. Some countries may have customs duties or import fees that are the responsibility of the recipient. We'll provide full tracking information for all shipments.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Bellar. Luxury reimagined for the adventurous traveler.</p>
+            <p style="margin-top: 15px;">
+                <a href="/">Return to Presale</a> | 
+                <a href="#" style="margin: 0 15px;">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function changeImage(src, element) {
+            document.getElementById('mainImage').src = src;
+            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function updateImage() {
+            const color = document.querySelector('input[name="color"]:checked').value;
+            const colorImages = {
+                'White': 'https://images.unsplash.com/photo-1611938214457-0eab55dd4d0b?w=600&h=800&fit=crop',
+                'Beige': 'https://images.unsplash.com/photo-1620844208156-04b79e3eadc4?w=600&h=800&fit=crop',
+                'Pink': 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=600&h=800&fit=crop'
+            };
+            document.getElementById('mainImage').src = colorImages[color];
+        }
+
+        function increaseQty() {
+            const qty = document.getElementById('quantity');
+            if (parseInt(qty.value) < 10) {
+                qty.value = parseInt(qty.value) + 1;
+                updateTotal();
+            }
+        }
+
+        function decreaseQty() {
+            const qty = document.getElementById('quantity');
+            if (parseInt(qty.value) > 1) {
+                qty.value = parseInt(qty.value) - 1;
+                updateTotal();
+            }
+        }
+
+        function updateTotal() {
+            const qty = parseInt(document.getElementById('quantity').value);
+            const price = 135;
+            const subtotal = qty * price;
+            document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
+            document.getElementById('total').textContent = '$' + subtotal.toFixed(2);
+        }
+
+        document.getElementById('quantity').addEventListener('change', updateTotal);
+
+        function toggleFaq(element) {
+            const faqItem = element.closest('.faq-item');
+            faqItem.classList.toggle('open');
+        }
+
+        function addToCart(e) {
+            e.preventDefault();
+            const color = document.querySelector('input[name="color"]:checked').value;
+            const size = document.querySelector('input[name="size"]:checked').value;
+            const qty = document.getElementById('quantity').value;
+            alert(`Added to cart:\n${qty}x Bellar Hat (${color}, ${size})\n\nYour cart is ready for checkout!`);
+        }
+
+        function checkout(e) {
+            e.preventDefault();
+            const color = document.querySelector('input[name="color"]:checked').value;
+            const size = document.querySelector('input[name="size"]:checked').value;
+            const qty = document.getElementById('quantity').value;
+            const total = (135 * parseInt(qty)).toFixed(2);
+            
+            alert(`Ready to checkout!\n\nOrder Summary:\n${qty}x Bellar Hat\nColor: ${color}\nSize: ${size}\nTotal: $${total}\n\n🔒 Stripe integration ready!\nReplace STRIPE_PLACEHOLDER_KEY with your actual publishable key to enable payments.`);
+        }
+    </script>
+</body>
+</html>

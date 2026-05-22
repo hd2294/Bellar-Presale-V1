@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bellar - Luxury Collapsible Hat Presale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #2a2a2a;
+            background: #ffffff;
+        }
+        
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+        }
+        
+        .hero {
+            padding: 60px 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 52px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero-content .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .countdown-compact {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            background: #f8f8f8;
+            padding: 16px 20px;
+            border-radius: 4px;
+            align-items: center;
+        }
+        
+        .countdown-item-compact {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+        
+        .countdown-number-compact {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        
+        .countdown-label-compact {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #999;
+        }
+        
+        .countdown-divider {
+            color: #ddd;
+            margin: 0 8px;
+        }
+        
+        .hero-video {
+            aspect-ratio: 4/5;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .hero-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cta-primary {
+            display: inline-block;
+            background: #1a1a1a;
+            color: white;
+            padding: 14px 40px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-primary:hover {
+            background: #333;
+        }
+        
+        .pricing-strip {
+            background: #fafafa;
+            padding: 24px 0;
+            margin-bottom: 60px;
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .pricing-strip-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .price-item h3 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+        
+        .price-amount {
+            font-size: 44px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        
+        .price-savings {
+            font-size: 13px;
+            color: #666;
+            margin-top: 8px;
+        }
+        
+        .gallery-section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 60px;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 3/4;
+            background: #f0f0f0;
+            overflow: hidden;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.01);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .mechanism-section {
+            background: #f8f8f8;
+            padding: 80px 0;
+            margin-bottom: 60px;
+        }
+        
+        .mechanism-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .mechanism-video {
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .mechanism-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .mechanism-text h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .mechanism-text p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .feature {
+            text-align: left;
+        }
+        
+        .feature h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .feature p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .faq-section {
+            padding: 60px 0;
+            background: #ffffff;
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #e5e5e5;
+            padding: 20px 0;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            padding: 0;
+        }
+        
+        .faq-question:hover {
+            color: #666;
+        }
+        
+        .faq-toggle {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.open .faq-toggle {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-top: 0;
+        }
+        
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            margin-top: 15px;
+        }
+        
+        .checkout-section {
+            background: #f8f8f8;
+            padding: 80px 0;
+        }
+        
+        .checkout-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .checkout-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .checkout-content p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+        
+        #checkout-btn {
+            width: 100%;
+            padding: 18px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .security-note {
+            font-size: 13px;
+            color: #999;
+        }
+        
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 13px;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        footer a:hover {
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            
+            .mechanism-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-strip-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .countdown-compact {
+                flex-wrap: wrap;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">BELLAR</div>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Refuse to Compromise</h1>
+                    <p class="subtitle">Travel boldly. Pack light. Be yourself. A patented collapsible mechanism engineered for women who won't settle for ordinary.</p>
+                    
+                    <div class="countdown-compact">
+                        <div class="countdown-item-compact">
+                            <span class="countdown-number-compact" id="days-compact">45</span>
+                            <span class="countdown-label-compact">days</span>
+                        </div>
+                        <span class="countdown-divider">|</span>
+                        <div class="countdown-item-compact">
+                            <span class="countdown-number-compact" id="hours-compact">12</span>
+                            <span class="countdown-label-compact">hrs</span>
+                        </div>
+                        <span class="countdown-divider">|</span>
+                        <div class="countdown-item-compact">
+                            <span class="countdown-number-compact" id="minutes-compact">34</span>
+                            <span class="countdown-label-compact">min</span>
+                        </div>
+                        <span class="countdown-divider">|</span>
+                        <div class="countdown-item-compact">
+                            <span class="countdown-number-compact" id="seconds-compact">56</span>
+                            <span class="countdown-label-compact">sec</span>
+                        </div>
+                    </div>
+                    
+                    <a href="product.html" class="cta-primary">Secure Your Presale</a>
+                </div>
+                
+                <div class="hero-video">
+                    <video autoplay muted loop playsinline>
+                        <source src="https://via.placeholder.com/500x700" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="pricing-strip">
+        <div class="container">
+            <div class="pricing-strip-content">
+                <div class="price-item">
+                    <h3>Presale Price</h3>
+                    <div class="price-amount">$135</div>
+                    <div class="price-savings">Secure today</div>
+                </div>
+                <div class="price-item">
+                    <h3>Retail Price</h3>
+                    <div class="price-amount">$170</div>
+                    <div class="price-savings">Available July 15th</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Meet Your New Companion</h2>
+            <div class="gallery-grid" id="gallery">
+                <!-- Gallery images will load here -->
+            </div>
+        </div>
+    </section>
+
+    <section class="mechanism-section">
+        <div class="container">
+            <div class="mechanism-content">
+                <div class="mechanism-video">
+                    <video controls>
+                        <source src="https://via.placeholder.com/800x600" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="mechanism-text">
+                    <h2>The Innovation</h2>
+                    <p>Engineered with precision. Designed for freedom. Our patented collapse mechanism transforms from full silhouette to pocket-sized elegance in seconds.</p>
+                    <p>Every detail matters. Premium materials meet meticulous craftsmanship. This is luxury that moves with you.</p>
+                    <h3 style="margin-top: 30px; margin-bottom: 15px;">Why Choose Bellar</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 12px;"><strong>Patented Mechanism</strong> — Exclusive technology you won't find anywhere else</li>
+                        <li style="margin-bottom: 12px;"><strong>Luxury Materials</strong> — Premium fabrics and construction built to last</li>
+                        <li style="margin-bottom: 12px;"><strong>Bold Design</strong> — Fashion-forward styles for the adventurous woman</li>
+                        <li><strong>No Compromise</strong> — Refuse to settle. Bellar is for women who demand both beauty and function</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How does the presale work?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Order your Bellar hat now at the special presale price of $135. Your hat will be crafted and shipped when the product officially launches on July 15th, 2026. By preordering, you secure the luxury collapsible hat at a $35 discount off the retail price of $170.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>When will I receive my hat?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>All presale orders will ship starting July 15th, 2026. Shipping times depend on your location. Domestic orders typically arrive within 5-7 business days. International orders may take 10-14 business days. You'll receive a tracking number via email as soon as your order ships.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What are the available sizes?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The Bellar hat comes in one universal adjustable size that fits most head sizes comfortably. The design features an internal adjustable band to ensure a perfect fit for head circumferences between 54-59cm (21-23 inches). This universal sizing means you get the perfect fit without worrying about size selection.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What's your return and exchange policy?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We offer a 30-day return guarantee from the date you receive your hat. If you're not absolutely in love with your Bellar, you can return it in original condition for a full refund or exchange. We cover return shipping for defective items. No questions asked.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do refunds work?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Refunds are processed within 5-7 business days of receiving your return. The refund amount reflects your original purchase price. Return shipping is free for defective items; if you're returning for other reasons, you can use any shipping method. Once we receive and inspect your hat, your refund will be automatically credited to your original payment method.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Is the hat machine washable?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We recommend hand washing your Bellar hat with cool water and mild soap. Gently reshape while damp and lay flat to dry. Machine washing is not recommended as it may damage the premium materials and the patented collapse mechanism. This care extends the life of your investment piece.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Do you ship internationally?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we ship to most countries worldwide. International shipping costs vary based on location and will be calculated at checkout. Delivery times are typically 10-14 business days. Some countries may have customs duties or import fees that are the responsibility of the recipient. We'll provide full tracking information for all shipments.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="checkout-section">
+        <div class="container">
+            <div class="checkout-content">
+                <h2>Ready to Join the Movement?</h2>
+                <p>Lock in your presale price of $135 today. Your Bellar hat launches July 15th. Refuse to compromise. Travel boldly.</p>
+                <a href="product.html" class="cta-primary" id="checkout-btn" style="display: inline-block;">Secure Your Presale</a>
+                <p class="security-note">🔒 Secure payment processing with Stripe</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Bellar. Luxury reimagined for the adventurous traveler.</p>
+            <p style="margin-top: 15px;">
+                <a href="https://bellar.co">Visit Main Site</a> | 
+                <a href="#" style="margin: 0 15px;">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const productImages = [
+            'https://images.unsplash.com/photo-1611938214457-0eab55dd4d0b?w=400&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1620844208156-04b79e3eadc4?w=400&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=400&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1595777712802-d2fed6400e5a?w=400&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1559631067-a96a68c68771?w=400&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1529069030849-b98e0ed5a0f0?w=400&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1611938214457-0eab55dd4d0b?w=400&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1620844208156-04b79e3eadc4?w=400&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=400&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1595777712802-d2fed6400e5a?w=400&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1559631067-a96a68c68771?w=400&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1529069030849-b98e0ed5a0f0?w=400&h=600&fit=crop',
+        ];
+
+        const gallery = document.getElementById('gallery');
+        productImages.forEach(src => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `<img src="${src}" alt="Bellar Hat" loading="lazy">`;
+            gallery.appendChild(item);
+        });
+
+        function updateCountdown() {
+            const launchDate = new Date('2026-07-15T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days-compact').textContent = '0';
+                document.getElementById('hours-compact').textContent = '0';
+                document.getElementById('minutes-compact').textContent = '0';
+                document.getElementById('seconds-compact').textContent = '0';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days-compact').textContent = days;
+            document.getElementById('hours-compact').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes-compact').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds-compact').textContent = String(seconds).padStart(2, '0');
+        }
+
+        function toggleFaq(element) {
+            const faqItem = element.closest('.faq-item');
+            faqItem.classList.toggle('open');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
